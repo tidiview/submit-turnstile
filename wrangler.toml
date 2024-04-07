@@ -1,0 +1,5 @@
+name = "turnstile"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "d63f25216ff347198f3a34887c4ee355"
