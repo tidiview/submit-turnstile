@@ -6,7 +6,7 @@ import turnstilePlugin from "@cloudflare/pages-plugin-turnstile";
 
 // This is a demo secret key. In prod, we recommend you store
 // your secret key(s) safely. 
-const SECRET_KEY = '0x4AAAAAAAVnG2xM7Rs58xPsRah3p2OaLq0';
+const SECRET_KEY = '0x4AAAAAAAWkJV3tbASTeSQlJ7VXRJKP4v4';
 
 export const onRequestPost = [
     turnstilePlugin({
