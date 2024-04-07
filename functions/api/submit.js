@@ -28,8 +28,11 @@ export const onRequestPost = [
 
 		let pretty = JSON.stringify(outcome, null, 2);
 
-		return new Response(await context.env.TURNSTILE.put("key1", pretty)
-		);
+		return new Response(pretty, {
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			}
+		});
 
     })
 
