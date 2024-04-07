@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf8">
+		<title>Cloudflare Pages | Form Demo</title>
+		<meta name="theme-color" content="#d86300">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsSAAALEgHS3X78AAADW0lEQVRYw+2WS0hUURjHZ+aGkQTRJuih18kCIXBZLdRx1JYtQpNIggijFlFgSFmZd0ynTO2xDYraRKTmo7KoqE27aFOLSKJ3tMmNd0bn3nl8/b9zz505jo8yhTZz4Md359zH//993zn3jseTG7mxwBFt93sioSJxzFGFx3jzWk+kvWjphVUReewzDV0DXrNN9yD6MKcB70Q3TBqZ65dE3MyIs7B33usNYSR9L3X6Fylu6O6xpswHQBcYBKPgBjgIVvN5NqmaWJQBVRxRZ0HrXBFR10ai834HPr7gJ5z7CfbztRNnCz0LMuH0Vlf7zKVcxsi5EhZgMWSYjBi6jd9xkOCIubjV4RjD7za1EhFZxfnFjUyfZzm/HLzlbBEtkBIYesp0j0NFfC7B5mQ16sW94WLN7qtIP8seCMw0oPTZK+NKsA8cB5s50kWRuS2EIKyIUiTLRLxTGBiLhjfl8fNit7ZpENZccas/MNOImzmiH7zjLGQmnLEZbXeETM7amCZO2UZwTSIBE9iiO7OThbDQifWVT1tkYi/L44fULbK1uK9RPNgVV0RoTgNudQydor0lx+yh4G2rv+IOhBtBvlOBCl/2PncX2gowEXUellRKuxDiKawVs7XglXW3/Cg9qyEarSJ6VEUw8AGUiUqwCRYPa2kjq8BuMBWdXs7kXyKunUS1qKeYzJZ19fZw8Co9qSZkHAExGgmyiTjYnt3/ZvBrUukzRzbCvXThxRXHVmNsCW89fi/EJLgvhu/BSZnlARquJBoBD4KUuBcQEQbexLEoXfEO7jnfLIWFCWnGBNfAZdADwiAEzoAToAkcAYfkm7ABvV+TtejKQBNoAS+EifvCxC4WL1UyTmT1kuSL5gf4Lvmm8FXyBXwGn8B70CgW2s2teRAJgddgDHwE49wCelzNBnrZQAtvNRiI4S2YlAtP9FTGVEwprzUXHc55sW0NnauWD4EBelrjlH/YgbPHvMWLEvE6G7hCl4ppCuWOd86C0us/IQzw9m0teGn1lR+m5zucng9lDDDJQczhHFfHfb/vRaa1iHX/Cu7nyM9oME+tL8Xe34JV3wBqQR3E6iwgovN7Dyj8/3+x+N3PXz3+dyO/fovGPL3BZw9WepGpxshvQBplzpv7k5sbuZEbvwGDMvjj7QjeVAAAAABJRU5ErkJggg==">
+		<link rel="stylesheet" href="/index.css">
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb" defer></script>
+	</head>
+	<body>
+
+		<main>
+			<h1>Demo: Form Submission</h1>
+
+			<blockquote>
+				<p>This is a demonstration of Cloudflare Pages with Turnstile.</p>
+				<p>Pages deployed a <code>/public</code> directory, containing a HTML document (this webpage) and a <code>/functions</code> directory, which contains the Cloudflare Workers code for the API endpoint this <code>&lt;form&gt;</code> references.</p>
+				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
+			</blockquote>
+
+			<form method="POST" action="/api/submit">
+				<div class="input">
+					<label for="name">Full Name</label>
+					<input id="name" name="name" type="text" />
+				</div>
+
+				<div class="input">
+					<label for="email">Email Address</label>
+					<input id="email" name="email" type="email" />
+				</div>
+
+				<div class="input">
+					<label for="referers">How did you hear about us?</label>
+					<select id="referers" name="referers">
+						<option hidden disabled selected value></option>
+						<option value="Facebook">Facebook</option>
+						<option value="Twitter">Twitter</option>
+						<option value="Google">Google</option>
+						<option value="Bing">Bing</option>
+						<option value="Friends">Friends</option>
+					</select>
+				</div>
+
+				<div class="checklist">
+					<label>What are your favorite movies?</label>
+					<ul>
+						<li>
+							<input id="m1" type="checkbox" name="movies" value="Space Jam" />
+							<label for="m1">Space Jam</label>
+						</li>
+						<li>
+							<input id="m2" type="checkbox" name="movies" value="Little Rascals" />
+							<label for="m2">Little Rascals</label>
+						</li>
+						<li>
+							<input id="m3" type="checkbox" name="movies" value="Frozen" />
+							<label for="m3">Frozen</label>
+						</li>
+						<li>
+							<input id="m4" type="checkbox" name="movies" value="Home Alone" />
+							<label for="m4">Home Alone</label>
+						</li>
+					</ul>
+				</div>
+				<div id="turnstile-widget" style="padding-top: 20px;"></div>
+				<button type="submit">Submit</button>
+			</form>
+		</main>
+	<script>
+	// This function is called when the Turnstile script is loaded and ready to be used.
+	// The function name matches the "onload=..." parameter.
+	function _turnstileCb() {
+	    console.debug('_turnstileCb called');
+
+	    turnstile.render('#turnstile-widget', {
+	      sitekey: '0x4AAAAAAAVnGxjnSLqRwODv',
+	      theme: 'light',
+	    });
+	}
+	</script>
+	</body>
+</html>
