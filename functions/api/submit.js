@@ -27,8 +27,10 @@ export const onRequestPost = [
 		}
 
 		let pretty = JSON.stringify(outcome, null, 2);
+		const task = await context.env.TURNSTILE.put("turnstile1:", pretty,{
+			metadata: { someMetadataKey: "someMetadataValue" }, expirationTtl: 60});
 
-		return new Response(pretty, {
+		return new Response(task, {
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
 			}
