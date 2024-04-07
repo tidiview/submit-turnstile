@@ -27,8 +27,7 @@ export const onRequestPost = [
 		}
 
 		let pretty = JSON.stringify(outcome, null, 2);
-		const task = await context.env.TURNSTILE.put("turnstile1:", pretty,{
-			metadata: { someMetadataKey: "someMetadataValue" }, expirationTtl: 60});
+		const task = await context.env.TURNSTILE.put("turnstile1:", pretty);
 
 		return new Response(task, {
 			headers: {
