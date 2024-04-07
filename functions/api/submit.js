@@ -27,9 +27,12 @@ export const onRequestPost = [
 		}
 
 		let pretty = JSON.stringify(outcome, null, 2);
-		const task = await context.env.TURNSTILE.put("turnstile1", pretty);
 
-		return new Response(task);
+		return new Response(pretty, {
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			}
+		});
 
     })
 
