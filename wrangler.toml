@@ -1,5 +1,5 @@
-name = "turnstile"
+name = "submit-turnstile"
 
 [[kv_namespaces]]
-binding = "KV"
+binding = "TURNSTILE"
 id = "d63f25216ff347198f3a34887c4ee355"
